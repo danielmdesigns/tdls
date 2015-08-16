@@ -1,0 +1,163 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Todo List</title>
+
+<link href="http://fonts.googleapis.com/css?family=RobotoDraft:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en" rel="stylesheet" type="text/css">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.css" rel="stylesheet" type="text/css">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.css.map" rel="stylesheet" type="text/css">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/fonts/FontAwesome.otf" rel="stylesheet" type="text/css">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/fonts/fontawesome-webfont.eot" rel="stylesheet" type="text/css">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/fonts/fontawesome-webfont.svg" rel="stylesheet" type="text/css">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/fonts/fontawesome-webfont.ttf" rel="stylesheet" type="text/css">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/fonts/fontawesome-webfont.woff" rel="stylesheet" type="text/css">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/fonts/fontawesome-webfont.woff2" rel="stylesheet" type="text/css">
+
+<!-- jQuery served for Google -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<style>
+*{
+  margin:0;
+  padding:0;
+  list-style:none;
+}
+body {
+    font-family: 'RobotoDraft', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-size-adjust: 100%;
+	background: #f9f9f9;
+    color: #1b1b1b;
+}
+header {
+  height:75px;
+  width:100%;
+  background:#2dc32c;
+  color:white;
+  line-height:75px;
+  font-weight:light;
+}
+
+.brand {
+	font-size:30px;
+	padding-left:20px;
+}
+
+.brand:after {
+	font-family: FontAwesome;
+   content: "\f142";
+   font-size:20px;
+   float:right;
+   padding-right:20px;
+}
+
+ul{
+	padding:0 20px;
+}
+li{
+  border-bottom:1px solid #eee;
+  color:#333;
+  padding:20px 0 20px 0;
+}
+
+ul li:after {
+   font-family: FontAwesome;
+   content: "\f1f8";
+   float:right;
+   color:#fff;
+   padding:12px;
+   background:#e94043;
+}
+
+ul li:hover:after {
+   font-family: FontAwesome;
+   content: "\f1f8";
+   float:right;
+   background:#DA3C3F;
+}
+
+form {
+  width:100%;
+  position:fixed;
+  bottom:69px;
+  border-top:1px solid #cacaca;
+}
+
+input {
+  width:100%;
+  padding:15px;
+  font-size:16px;
+  border-radius:0;
+  border:0;
+  outline:none;
+  height:35px;
+}
+
+textarea, input, button {
+  outline: none;
+  box-shadow: none;
+}
+
+button {
+  width:100%;
+  padding:20px;
+  background-color:#2DC32C;
+  color:white;
+  border:0;
+  position:fixed;
+  bottom:0;
+  width:100%;
+  font-size:16px;
+  height:70px;
+}
+button:hover {
+  background-color:#28B427;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <p class="brand">Quick Shopr</p>
+  <i class="fa fa-ellipsis-v"></i>
+</header>
+<main>
+  <ul id="list"></ul>
+</main>
+<form id="form">
+  <input type="text" placeholder="Add New Item">
+</form>
+<button>Add Item</button>
+
+<script>
+//add
+$("button").on("click", function() {
+  var $item = $("input").val();
+  $("ul").append("<li>" + $item + "</li>");
+  
+//set
+$('#form')[0].reset();
+  var list = $('#list').html();
+  localStorage.setItem('list', list);
+  return false;
+});
+//show
+if(localStorage.getItem('list')) {
+  $('#list').html(localStorage.getItem('list'));
+}
+//remove
+$("ul").on("click", "li", function () {
+    $(this).remove();
+    var i = $(this).text();
+    var currentList = localStorage.getItem('list');
+	// get the current list as a string.
+    var newList = currentList.replace('<li>' + i + '</li>', '');
+	// replace the clicked item with a blank string. But if you have multiple tasks with the same name this will cause deleting each of them
+    localStorage.setItem('list', newList);
+	// update the localStorage with the new list
+});
+</script>
+</body>
+</html>
