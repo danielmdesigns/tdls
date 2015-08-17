@@ -17,121 +17,211 @@
 
 <!-- jQuery served for Google -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
 <style>
-*{
-  margin:0;
-  padding:0;
-  list-style:none;
+/* general */
+* {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+html,
+body {
+  height: 100%;
 }
 body {
-    font-family: 'RobotoDraft', sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -webkit-text-size-adjust: 100%;
-	background: #f9f9f9;
-    color: #1b1b1b;
+  font-family: 'RobotoDraft', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -webkit-text-size-adjust: 100%;
+  background: #f9f9f9;
+  color: #1b1b1b;
+  margin: 0;
 }
+#container {
+  display: table;
+  width: 100%;
+  height: 100%;
+  min-height: 100%;
+}
+#container-inner {
+  display: table-cell;
+}
+
+/* header section */
 header {
-  height:75px;
-  width:100%;
-  background:#2dc32c;
-  color:white;
-  line-height:75px;
-  font-weight:light;
+  height: 75px;
+  width: 100%;
+  background: #2dc32c;
+  color: white;
+  line-height: 75px;
+  font-weight: light;
+  position: fixed;
+  top: 0;
 }
-
 .brand {
-	font-size:30px;
-	padding-left:20px;
+  font-size: 30px;
+  padding-left: 20px;
+}
+.icon{
+  color:#FFF;
+  display:inline;
+  float:right;
+  line-height:75px;
+  padding-right:20px;
+  font-size:20px;
 }
 
-.brand:after {
-	font-family: FontAwesome;
-   content: "\f142";
-   font-size:20px;
-   float:right;
-   padding-right:20px;
+/* main section */
+ul#list {
+  padding: 0 20px;
+  margin-bottom: 150px;
+  margin-top: 10px;
 }
-
-ul{
-	padding:0 20px;
+#list li {
+  border-bottom: 1px solid #eee;
+  color: #333;
+  padding: 20px 0 20px 0;
 }
-li{
-  border-bottom:1px solid #eee;
-  color:#333;
-  padding:20px 0 20px 0;
-}
-
 ul li:after {
-   font-family: FontAwesome;
-   content: "\f1f8";
-   float:right;
-   color:#fff;
-   padding:12px;
-   background:#e94043;
+  font-family: FontAwesome;
+  content: "\f1f8";
+  float: right;
+  color: #fff;
+  padding: 12px;
+  background: #e94043;
 }
-
 ul li:hover:after {
-   font-family: FontAwesome;
-   content: "\f1f8";
-   float:right;
-   background:#DA3C3F;
+  font-family: FontAwesome;
+  content: "\f1f8";
+  float: right;
+  background: #DA3C3F;
 }
 
+/* footer section */
+footer {
+  position: fixed;
+  bottom: 0;
+}
 form {
-  width:100%;
-  position:fixed;
-  bottom:69px;
-  border-top:1px solid #cacaca;
+  width: 100%;
+  position: fixed;
+  bottom: 69px;
+  border-top: 1px solid #cacaca;
 }
-
 input {
-  width:100%;
-  padding:15px;
-  font-size:16px;
-  border-radius:0;
-  border:0;
-  outline:none;
-  height:35px;
+  width: 100%;
+  padding: 15px;
+  font-size: 16px;
+  border-radius: 0;
+  border: 0;
+  outline: none;
+  height: 35px;
 }
-
-textarea, input, button {
+textarea,
+input,
+button {
   outline: none;
   box-shadow: none;
 }
-
 button {
-  width:100%;
-  padding:20px;
-  background-color:#2DC32C;
-  color:white;
-  border:0;
-  position:fixed;
-  bottom:0;
-  width:100%;
-  font-size:16px;
-  height:70px;
+  width: 100%;
+  padding: 20px;
+  background-color: #2DC32C;
+  color: white;
+  border: 0;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  font-size: 16px;
+  height: 70px;
 }
 button:hover {
-  background-color:#28B427;
+  background-color: #28B427;
+}
+
+/* dropdown section */
+.dropdown-menu {
+  position: absolute;
+  top: 70%;
+  right: 20px;
+  z-index: 1000;
+  font-size: 14px;
+  text-align: left;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
+  background-clip: padding-box;
+  -webkit-transition: all 0.2s ease;
+  opacity: 0;
+  -webkit-transform-origin: right top 0px;
+  -webkit-transform: scale(0);
+}
+ol#menu-list {
+  min-width: 160px;
+  line-height:40px;
+  padding-left:10px;
+  list-style: none;
+  position: relative;
+}
+ol#menu-list li,
+#menu-list li a {
+	color:#1b1b1b;
+	text-decoration:none;
+}
+#menu-list li a:hover {
+	color:#484848;
+}
+.dropdown-menu.active {
+  opacity: 1;
+  -webkit-transform-origin: right top 0px;
+  -webkit-transform: scale(1);
+}
+#menu-list li {
+  opacity: 1;
+  transform: translateY(0px);
 }
 </style>
 </head>
 
 <body>
-
+<div id="container">
+  <div id="container-inner">
+  
 <header>
-  <p class="brand">Quick Shopr</p>
-  <i class="fa fa-ellipsis-v"></i>
+  <div class="header-group">
+    <span class="brand">grocerylst</span>  
+    <a href="#" class="dropdown-icon">
+    	<i class="fa fa-ellipsis-v icon"></i>
+    </a>
+    
+<div class="dropdown-menu">
+<ol id="menu-list">
+<li><a href="#">Version 3.0.0-beta</a></li>
+<li><a href="#">Developer Info</a></li>
+<li><a href="#">Report a Bug</a></li>
+</ol>
+</div>
+
+  </div>
 </header>
+
 <main>
   <ul id="list"></ul>
 </main>
-<form id="form">
-  <input type="text" placeholder="Add New Item">
-</form>
-<button>Add Item</button>
+
+<footer>
+  <form id="form">
+    <input type="text" placeholder="Add New Item">
+  </form>
+  <button>Add Item</button>
+</footer>
+
+  </div>
+</div>
 
 <script>
+//list logic & browser storage
 //add
 $("button").on("click", function() {
   var $item = $("input").val();
@@ -157,6 +247,21 @@ $("ul").on("click", "li", function () {
 	// replace the clicked item with a blank string. But if you have multiple tasks with the same name this will cause deleting each of them
     localStorage.setItem('list', newList);
 	// update the localStorage with the new list
+});
+
+
+//dropdown info
+$('html').click(function() {
+  $('.dropdown-menu').removeClass("active");
+});
+
+$(".dropdown-icon").click(function(e) {
+  e.stopPropagation();
+  $('.dropdown-menu').toggleClass("active");
+});
+
+$('.dropdown-menu').click(function(e) {
+  e.stopPropagation();
 });
 </script>
 </body>
