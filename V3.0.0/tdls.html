@@ -254,6 +254,14 @@ ol#menu-list li,
 </div>
 
 <script>
+//alert if input left blank
+$('button').click(function(){
+   if($('input').val() == ''){
+      alert('Sorry, but your input can not be left blank.');
+	  e.preventDefault();
+   }
+});
+
 //list logic & browser storage
 //add
 $("button").on("click", function() {
