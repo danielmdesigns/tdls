@@ -103,10 +103,11 @@ header {
 /* main section */
 main{
 	padding-top:75px;
+	/*padding-bottom:69px;*/
 }
 ul#list {
   padding: 0 20px;
-  /*margin-bottom: 150px;*/
+  margin-bottom: 150px;
   margin-top: 10px;
 }
 #list li {
@@ -254,6 +255,8 @@ ol#menu-list li,
 </div>
 
 <script>
+$(document).ready(function(){
+
 //list logic & browser storage
 //add
 $("button").on("click", function() {
@@ -298,6 +301,14 @@ $('.dropdown-menu').click(function(e) {
 });
 
 //mobile keyboard fix
+
+//make phone numbers a link
+/*var regex = /((\(\d{3}\) ?)|(\d{3}-))?\d{3}-\d{4}/g; 
+var text = $("body:first").html();
+text = text.replace(regex, "<a href=\"tel:$&\">$&</a>");
+$("body:first").html(text);*/
+
+});
 </script>
 </body>
 </html>
