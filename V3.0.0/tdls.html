@@ -7,7 +7,7 @@
 <!--IE compatibility mode-->
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <!--Mobile Device Support-->
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, target-densityDpi=device-dpi" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <!-- Roboto Draft Typography -->
 <link href="http://fonts.googleapis.com/css?family=RobotoDraft:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en" rel="stylesheet" type="text/css">
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.css" rel="stylesheet" type="text/css">
@@ -231,10 +231,10 @@ ol#menu-list li,
     
 <div class="dropdown-menu">
 <ol id="menu-list">
-<li><a href="#">About this App</a></li>
+<li><a href="#">Support</a></li>
+<li><a href="#">Homepage</a></li>
 <li><a href="#">Developer Info</a></li>
-<li><a href="#">Report a Bug</a></li>
-<li><a href="#">Visit Homepage</a></li>
+<li><a href="#">About this App</a></li>
 </ol>
 </div>
 
@@ -267,7 +267,7 @@ $('button').click(function(){
 });
 
 //list logic & browser storage
-//add
+//add using "button"
 $("button").on("click", function() {
   var $item = $("input").val();
   $("ul").append("<li>" + $item + "</li>");
@@ -278,6 +278,14 @@ $('#form')[0].reset();
   localStorage.setItem('list', list);
   return false;
 });
+
+//add using "enter"
+$('input').keypress(function(e){
+  if(e.which == 13){
+	$('button').click();
+  }
+});
+
 //show
 if(localStorage.getItem('list')) {
   $('#list').html(localStorage.getItem('list'));
@@ -289,7 +297,7 @@ $("ul").on("click", "li", function () {
     var currentList = localStorage.getItem('list');
 	// get the current list as a string.
     var newList = currentList.replace('<li>' + i + '</li>', '');
-	// replace the clicked item with a blank string. But if you have multiple tasks with the same name this will cause deleting each of them
+	// replace the clicked item with a blank string.
     localStorage.setItem('list', newList);
 	// update the localStorage with the new list
 });
