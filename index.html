@@ -86,6 +86,8 @@ header {
   font-weight: light;
   position: fixed;
   top: 0;
+  /*box-shadow:0 8px 6px -6px lightgray;*/
+  box-shadow:0 2px 5px 0 rgba(0,0,0,0.26);
 }
 .brand {
   font-size: 30px;
@@ -106,7 +108,7 @@ main{
 	/*padding-bottom:69px;*/
 }
 ul#list {
-  padding: 0 20px;
+  padding: 0 10px;
   margin-bottom: 150px;
   margin-top: 10px;
 }
@@ -119,15 +121,16 @@ ul li:after {
   font-family: FontAwesome;
   content: "\f1f8";
   float: right;
-  color: #fff;
+  color: #e5e5e5;
   padding: 12px;
-  background: #e94043;
+  /*background: #e94043;*/
 }
 ul li:hover:after {
   font-family: FontAwesome;
   content: "\f1f8";
   float: right;
-  background: #DA3C3F;
+  color:#cacaca; 
+  /*background: #DA3C3F;*/
 }
 
 /* footer section */
@@ -139,7 +142,7 @@ form {
   width: 100%;
   position: fixed;
   bottom: 69px;
-  border-top: 1px solid #cacaca;
+/*  border-top: 1px solid #cacaca;*/
 }
 input {
   width: 100%;
@@ -158,7 +161,6 @@ button {
 }
 button {
   width: 100%;
-  /*padding: 20px;*/
   background-color: #2DC32C;
   color: white;
   border: 0;
@@ -168,9 +170,9 @@ button {
   font-size: 16px;
   height: 70px;
 }
-button:hover {
+/*button:hover {
   background-color: #28B427;
-}
+}*/
 
 /* dropdown section */
 .dropdown-menu {
@@ -201,6 +203,7 @@ ol#menu-list li,
 #menu-list li a {
 	color:#1b1b1b;
 	text-decoration:none;
+	box-shadow: none;
 }
 #menu-list li a:hover {
 	color:#484848;
@@ -217,10 +220,96 @@ ol#menu-list li,
 
 li{
 	background:white;
+	box-shadow:0 2px 5px 0 rgba(0,0,0,0.26);
+}
+li:first-child{
+	/*border-top-left-radius: 6px;
+	border-top-right-radius: 6px;*/
 }
 li:last-child{
-	box-shadow:0 8px 6px -6px lightgray
+	/*box-shadow:0 2px 5px 0 rgba(0,0,0,0.26);*/
+	/*border-bottom-left-radius: 6px;
+	border-bottom-right-radius: 6px;*/
 }
+
+
+/* input animation */
+input {
+  border: 0;
+  height: 40px;
+  background-image: linear-gradient(#D2D2D2, #D2D2D2);
+  background-size: 100% 2px;
+  background-repeat: no-repeat;
+  background-position: center top;
+}
+input:focus {
+  background-image: linear-gradient(#28B427, #28B427), linear-gradient(#D2D2D2, #D2D2D2);
+  animation: input 0.5s forwards;
+  box-shadow: none;
+  outline: 0;
+  background-size: 0% 2px;
+}
+
+@keyframes input {
+  0% {
+    background-size: 0% 2px, 100% 2px;
+  }
+
+  100% {
+    background-size: 100% 2px, 100% 2px;
+  }
+}
+
+
+
+
+/* button animation */
+
+/*button {
+  position: relative;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  background: #2dc32c;
+  color: white;
+  padding: 18px 60px;
+  border-radius: 2px;
+  font-size: 22px;
+}
+
+.fab {
+  border-radius: 50%;
+  width: 70px;
+  height: 70px;
+  padding: 0;
+  text-align: center;
+}*/
+
+.ripple {
+  overflow: hidden;
+}
+
+.ripple-effect {
+  position: absolute;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  background: white;
+  animation: ripple-animation 2s;
+}
+
+@keyframes ripple-animation {
+  from {
+    transform: scale(1);
+    opacity: 0.4;
+  }
+  to {
+    transform: scale(100);
+    opacity: 0;
+  }
+}
+
+
 
 </style>
 </head>
@@ -256,7 +345,7 @@ li:last-child{
   <form id="form">
     <input type="text" placeholder="Add New Item">
   </form>
-  <button>Add Item</button>
+  <button class="ripple">Add Item</button>
 </footer>
 
   </div>
@@ -331,6 +420,42 @@ $('.dropdown-menu').click(function(e) {
 var text = $("body:first").html();
 text = text.replace(regex, "<a href=\"tel:$&\">$&</a>");
 $("body:first").html(text);*/
+
+//button animation
+(function(window, $) {
+
+  $(function() {
+
+    $('.ripple').on('click', function(event) {
+      event.preventDefault();
+
+      var $div = $('<div/>'),
+        btnOffset = $(this).offset(),
+        xPos = event.pageX - btnOffset.left,
+        yPos = event.pageY - btnOffset.top;
+
+      $div.addClass('ripple-effect');
+      var $ripple = $(".ripple-effect");
+
+      $ripple.css("height", $(this).height());
+      $ripple.css("width", $(this).height());
+      $div
+        .css({
+          top: yPos - ($ripple.height() / 2),
+          left: xPos - ($ripple.width() / 2),
+          background: $(this).data("ripple-color")
+        })
+        .appendTo($(this));
+
+      window.setTimeout(function() {
+        $div.remove();
+      }, 2000);
+    });
+
+  });
+
+})(window, jQuery);
+
 
 });
 </script>
